@@ -243,7 +243,7 @@ void usbDrawData(unsigned long baud, unsigned long sent)
   tft.setCursor(2, 85); tft.println("[Sent]");
 
   tft.setTextColor(ST77XX_GREEN);
-  
+
   tft.fillRect(0, 45, DISPLAY_WIDTH, 20, ST77XX_BLACK);
   tft.setCursor(5, 45);
   tft.print(baud);

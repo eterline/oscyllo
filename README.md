@@ -7,8 +7,12 @@ Self use oscilloscope project on [LOLIN(WEMOS) D1 R2 & mini](https://iotappstory
 ## Modes
 
 - Direct reading - reads values from ADC and draw it on TFT 1.8.
+![reading](pictures/reading_2.JPG)
+
 - Save mode - in porcess...
+
 - USB Mode - sends data via serial port. For reading use: **Oscyllo-tool**.
+![usb](pictures/usb_1.JPG)
 
 
 ## Parameters
@@ -21,3 +25,4 @@ Self use oscilloscope project on [LOLIN(WEMOS) D1 R2 & mini](https://iotappstory
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
