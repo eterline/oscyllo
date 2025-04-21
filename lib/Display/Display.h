@@ -48,7 +48,7 @@ void oscDrawData();
 void oscDrawGraph(uint16_t* arr, unsigned long duration, unsigned long samples, unsigned long freq, uint16_t max_v, uint16_t avg_v);
 
 void usbDrawData(unsigned long baud, unsigned long sent);
-void usbDrawInfo(unsigned long baud, unsigned long sent);
+void usbDrawInfo(unsigned long baud);
 
 // ==================================================
 #endif

@@ -8,7 +8,7 @@
 extern "C" { uint16 system_adc_read(void); }
 
 #define GRAPH_LEN   256
-#define JSON_LEN    1024
+#define JSON_LEN    2048
 
 #define MILLIVOLTS_PER_STEP    16.329
 // ======================

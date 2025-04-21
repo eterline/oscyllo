@@ -77,7 +77,7 @@ void loop() {
       if (!buttonLeft.holding() && buttonRight.click()) { NextBaud(); }
 
       oscillo.Serialize(json, JSON_LEN); SerialSend(json);
-      usbDrawInfo(SerialSpeed(), SerialSentBytes());
+      usbDrawInfo(SerialSpeed());
       break;
 
     default:

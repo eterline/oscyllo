@@ -3,7 +3,7 @@
 // ==================================================
 
 #define DEFAULT_SCALE 1
-#define FRAME_TIME    100
+#define FRAME_TIME    100 // rate - 10 fps
 
 #define DISPLAY_WIDTH     160
 #define DISPLAY_HEIGHT    128
@@ -25,6 +25,16 @@ unsigned long __old_frame_time = 0;
 bool allowDrawFrame() {
   __frame_time_now = millis();
   bool allow = __frame_time_now - __old_frame_time >= FRAME_TIME;
+  if (allow)
+  {
+    __old_frame_time = __frame_time_now;
+  }
+  return allow;
+}
+
+bool allowDrawFrameIn(unsigned long t) {
+  __frame_time_now = millis();
+  bool allow = __frame_time_now - __old_frame_time >= t;
   if (allow)
   {
     __old_frame_time = __frame_time_now;
@@ -166,7 +176,7 @@ void oscDrawData()
 }
 
 void oscDrawGraph(uint16_t* arr, unsigned long duration, unsigned long samples, unsigned long freq, uint16_t max_v, uint16_t avg_v) {
-  if (allowDrawFrame()) // frame rate stop
+  if (allowDrawFrame()) // frame rate stop - 2 fps
   {
     static uint16_t old_map[GRAPH_LEN];
 
@@ -240,7 +250,7 @@ void usbDrawData(unsigned long baud, unsigned long sent)
   tft.setTextColor(ST77XX_ORANGE);
 
   tft.setCursor(2, 25); tft.println("[Baud]");
-  tft.setCursor(2, 85); tft.println("[Sent]");
+  // tft.setCursor(2, 85); tft.println("[Sent]");
 
   tft.setTextColor(ST77XX_GREEN);
 
@@ -248,17 +258,17 @@ void usbDrawData(unsigned long baud, unsigned long sent)
   tft.setCursor(5, 45);
   tft.print(baud);
 
-  tft.fillRect(0, 105, DISPLAY_WIDTH, 20, ST77XX_BLACK);
-  tft.setCursor(5, 105);
-  printSentSize(sent);
+  // tft.fillRect(0, 105, DISPLAY_WIDTH, 20, ST77XX_BLACK);
+  // tft.setCursor(5, 105);
+  // printSentSize(sent);
 }
 
-void usbDrawInfo(unsigned long baud, unsigned long sent)
+void usbDrawInfo(unsigned long baud)
 {
   static unsigned long __old_baud = 0;
-  static unsigned long __old_sent = 0;
+  // static unsigned long __old_sent = 0;
 
-  if (allowDrawFrame()) // frame rate stop
+  if (allowDrawFrameIn(1000)) // frame rate stop - 1 fps
   {
     tft.setTextSize(2);
     tft.setTextColor(ST77XX_GREEN);
@@ -270,11 +280,11 @@ void usbDrawInfo(unsigned long baud, unsigned long sent)
       tft.print(baud);
     }
 
-    if (__old_sent != sent) {
-      __old_sent = sent;
-      tft.fillRect(0, 105, DISPLAY_WIDTH, 20, ST77XX_BLACK);
-      tft.setCursor(5, 105);
-      printSentSize(sent);
-    }
+    // if (__old_sent != sent) {
+    //   __old_sent = sent;
+    //   tft.fillRect(0, 105, DISPLAY_WIDTH, 20, ST77XX_BLACK);
+    //   tft.setCursor(5, 105);
+    //   printSentSize(sent);
+    // }
   }
 }
